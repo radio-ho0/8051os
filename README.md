@@ -2,3 +2,6 @@
 ======
 
 very simple 8051 os
+
+
+- goodbye the evil delay() function!!!
