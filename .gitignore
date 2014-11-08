@@ -1,0 +1,15 @@
+# SDCC stuff
+*.lnk
+*.lst
+*.map
+*.mem
+*.rel
+*.rst
+*.sym
+*.asm
+todo
+*.bin
+*.hex
+*.ihx
+*.lk
+*~
