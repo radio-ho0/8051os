@@ -1,7 +1,4 @@
-8051os
-======
+51matrix
+========
 
-very simple 8051 os
-
-
-- goodbye the evil delay() function!!!
+51mcu matrix on 1602
