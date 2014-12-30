@@ -1,4 +1,5 @@
-51matrix
-========
+my very simple 51 os
+=================================
 
-51mcu matrix on 1602
+display on 1602
+
