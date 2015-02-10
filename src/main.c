@@ -1,5 +1,5 @@
 #include <at89x52.h>
-#include "lcd.h"
+#include "lcd1602.h"
 #include "core.h"
 
 // to show  string
@@ -10,15 +10,12 @@ __code char  str_task[] = "running task:  ";
 
 void main(void)
 {
-	LCDInit();	
+    InitLcd1602();
+    LcdShowStr(2, 0, str1);
+    LcdShowStr(0, 1, str2);
 
-    DisplayListChar(str1);
-    writeline2();
-    DisplayListChar(str2);
-
-    writeline2();
 //    DisplayListChar("hello ele1000!!!");
-    DisplayListChar(str_task);
+    showStr(str_task);
 
     timer_init();
     task_init();
