@@ -2,13 +2,16 @@
 //#include <stdlib.h>
 #include <string.h>
 #include "core.h"
-#include "lcd.h"
+#include "lcd1602.h"
 
 task_t tasks[TASK_MAX];
 __sbit __at 0x95  TRIG; // P1_1
 __sbit __at 0x96  ECHO;
 
-
+char* __code num_array[] = {
+    "0", "1", "2", "3", "4",
+    "5", "6", "7", "8", "9",
+};
 
 // TODO:
 //void add_task( ..... );
@@ -19,6 +22,7 @@ int j = 0;
 char todo_flag = 0;
 void (*todo_task)(void);
 
+inline void taskReport(int num);
 void timer_init(void)
 {
     TMOD &= 0xf0;
@@ -144,73 +148,26 @@ void gotosleep(void)
 void task1(void)
 {
     P2 =~P2;
-    writewhere(TASK_NUM_POS -2);
-    DisplayListChar("*");
+    LcdShowStr(TASK_NUM_POS - 1, 2, "&");
+    taskReport(1);
 }
 
 void task2(void)
 {
     P0 = ~P0;
-    writewhere(TASK_NUM_POS - 2);
-    DisplayListChar("^");
+    LcdShowStr(TASK_NUM_POS - 1, 2, "^");
+    taskReport(2);
 }
 
 void task3(void)
 {
     P3 = ~P3;
-    writewhere(TASK_NUM_POS);
-    DisplayListChar("-");
+    LcdShowStr(TASK_NUM_POS - 1, 2, "-");
+    taskReport(3);
 }
 
 void task4(void)
 {
-  char old_tmod = TMOD;
-  int m400;
-  //char ins_value;
-  
-  EA  = 0;
-  TMOD = 0x11; 
-  TH1 = 0;
-  TL1 = 0;
-
-  EA = 1;
-  TRIG = 0;
-  TRIG = 1;
-  delay_us(10);  // over 10us
-  TRIG = 0;
-  
-  while(ECHO == 0)
-          ;
-        TR1 = 0;
-        m400 = (TH1 * 256 + TL1) / 58; // calc instance
-        if(m400 > 400){
-            DisplayListChar("beyond 400cm!!!");
-        }else if(m400 < 100){
-	  //show_cmeter(ins_value);
-   //       ins_value = m400;
-  //        DisplayListChar(ins_value);
-            DisplayListChar("cm!!!");
-	  
-	}else{
-//	  ins_value = m400 / 100;
-//	  DisplayListChar(ins_value);
-	  DisplayListChar("meter");
-
-	}
-	
-  EA = 0;
-  TMOD = old_tmod;
-  //show_meter();
-  EA = 1;
-
-
-  //  int i = 100;
-  //  char val_arr[10];
- //   itoa(i, val_arr); 
-    //itoa(i, val_arr, 10); 
-    //
-    writewhere(TASK_NUM_POS);
-    DisplayListChar("=");
 }
 //
 // /* itoa:  convert n to characters in s */
@@ -243,3 +200,7 @@ void task4(void)
 //         s[j] = c;
 //     }
 // }
+void taskReport(int num)
+{
+    LcdShowStr(TASK_NUM_POS - 1, 0, num_array[num]);
+}
