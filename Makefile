@@ -12,11 +12,11 @@ bin: hex
 	hex2bin $(OUTPUT)/$(FILENAME).hex
 
 hex: rel
-	$(CC) $(FLAGS) $(SRC)/$(FILENAME).c $(OUTPUT)/lcd.rel $(OUTPUT)/core.rel  -o $(OUTPUT)/$(FILENAME).ihx
+	$(CC) $(FLAGS) $(SRC)/$(FILENAME).c $(OUTPUT)/lcd1602.rel $(OUTPUT)/core.rel  -o $(OUTPUT)/$(FILENAME).ihx
 	$(MAKEHEX) $(OUTPUT)/$(FILENAME).ihx >./$(OUTPUT)/$(FILENAME).hex
 
 rel:
-	$(CC) $(FLAGS) $(SRC)/lcd.c -c -o $(OUTPUT)/lcd.rel
+	$(CC) $(FLAGS) $(SRC)/lcd1602.c -c -o $(OUTPUT)/lcd1602.rel
 	$(CC) $(FLAGS) $(SRC)/core.c -c -o $(OUTPUT)/core.rel
 	
 .PHONY: clean
