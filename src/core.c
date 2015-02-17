@@ -6,8 +6,6 @@
 #include "distancer.h"
 
 task_t tasks[TASK_MAX];
-__sbit __at 0x95  TRIG; // P1_1
-__sbit __at 0x96  ECHO;
 
 char* __code num_array[] = {
     "0", "1", "2", "3", "4",
@@ -173,6 +171,8 @@ void task4(void)
     UltStart();
     UltCount();
     ShowDistance();
+   taskReport(4); 
+ //  LcdShowNum("   ");
   
 }
 //

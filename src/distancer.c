@@ -45,5 +45,5 @@ void UltCount()
 
 void ShowDistance()
 {
-    LcdShowNum(1, 2, L);
+    LcdShowNum( 12, 1, L);
 }
