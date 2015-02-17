@@ -4,6 +4,10 @@ __sbit __at 0x91 LCD1602_RW;
 __sbit __at 0x92 LCD1602_E;
 __sfr  __at 0xa0 LCD1602_DB;
 
+char __code NumArray[] = {
+    '0', '1', '2', '3', '4', 
+    '5', '6', '7', '8', '9'
+};
 
 /* 等待液晶准备好 */
 void LcdWaitReady()
@@ -60,7 +64,7 @@ void LcdShowStr(unsigned char x, unsigned char y, unsigned char *str)
     }
 }
 
-void showStr(unsigned char* str)
+void ShowStr(unsigned char* str)
 {
     LcdSetCursor(0, 0);
     while (*str != '\0')  //连续写入字符串数据，直到检测到结束符
@@ -78,4 +82,27 @@ void InitLcd1602()
     LcdWriteCmd(0x0C);  //显示器开，光标关闭
     LcdWriteCmd(0x06);  //文字不动，地址自动+1
     LcdWriteCmd(0x01);  //清屏
+}
+
+
+void LcdShowNum(uint x, uint y, uint number)
+{
+    
+     char ge   =  ( number / 1000 )  % 10;
+     char shi  =  ( number /100  )  % 10;
+     char bai=  ( number / 10   )  % 10;
+     char qian =  ( number        )  % 10;
+    char StrBuf[5] = {0};
+    StrBuf[0] =  NumArray[ ge  ];
+    StrBuf[1] =  NumArray[ shi ];
+    StrBuf[2] =  NumArray[ bai ];
+    StrBuf[3] =  NumArray[ qian];
+    StrBuf[4] = '\0';
+
+    LcdShowStr(x, y, StrBuf);
+
+    //StrBuf[0] =  NumArray[ qian ];
+    //StrBuf[1] =  NumArray[ bai ];
+    //StrBuf[2] =  NumArray[ shi ];
+    //StrBuf[3] =  NumArray[ ge];
 }

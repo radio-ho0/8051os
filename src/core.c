@@ -3,6 +3,7 @@
 #include <string.h>
 #include "core.h"
 #include "lcd1602.h"
+#include "distancer.h"
 
 task_t tasks[TASK_MAX];
 __sbit __at 0x95  TRIG; // P1_1
@@ -68,7 +69,7 @@ void task_init(void)
  //   tasks[2].delay = 500;
  
     app_add(&task3, TIMER_1S);
-    app_add(&task4, 330);
+    app_add(&task4, 1330);
     for(j = 0; j< TASK_MAX; ++j){
         tasks[j].counter = 0;
     }
@@ -168,6 +169,11 @@ void task3(void)
 
 void task4(void)
 {
+    UltInit();
+    UltStart();
+    UltCount();
+    ShowDistance();
+  
 }
 //
 // /* itoa:  convert n to characters in s */

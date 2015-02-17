@@ -15,7 +15,7 @@ void main(void)
     LcdShowStr(0, 1, str2);
 
 //    DisplayListChar("hello ele1000!!!");
-    showStr(str_task);
+    ShowStr(str_task);
 
     timer_init();
     task_init();
