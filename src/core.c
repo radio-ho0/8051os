@@ -147,21 +147,21 @@ void gotosleep(void)
 void task1(void)
 {
     P2 =~P2;
-    LcdShowStr(TASK_NUM_POS - 1, 2, "&");
+    LcdShowStr(TASK_NUM_POS , 0, "&");
     taskReport(1);
 }
 
 void task2(void)
 {
     P0 = ~P0;
-    LcdShowStr(TASK_NUM_POS - 1, 2, "^");
+    LcdShowStr(TASK_NUM_POS , 0, "^");
     taskReport(2);
 }
 
 void task3(void)
 {
     P3 = ~P3;
-    LcdShowStr(TASK_NUM_POS - 1, 2, "-");
+    LcdShowStr(TASK_NUM_POS , 0, "-");
     taskReport(3);
 }
 
@@ -169,9 +169,11 @@ void task4(void)
 {
     UltInit();
     UltStart();
+    TR0 = 0;
     UltCount();
     ShowDistance();
    taskReport(4); 
+    TR0 = 1;
  //  LcdShowNum("   ");
   
 }

@@ -5,8 +5,8 @@
 // to show  string
 __code char  str1[] = " Hello World!!! ";	
 __code char  str2[] = "Practice mk perfect";
-__code char  str3[] = "$status$:: ";
-__code char  str_task[] = "running task:  ";
+__code char  str3[] = "$distance$:: ";
+__code char  str_task[] = "running task:        ";
 
 
 void main(void)
