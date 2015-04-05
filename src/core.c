@@ -67,7 +67,8 @@ void task_init(void)
  //   tasks[2].delay = 500;
  
     app_add(&task3, TIMER_1S);
-    app_add(&task4, 1330);
+    app_add(&task4, 111);
+    app_add(&task5, 641);
     for(j = 0; j< TASK_MAX; ++j){
         tasks[j].counter = 0;
     }
@@ -171,11 +172,18 @@ void task4(void)
     UltStart();
     TR0 = 0;
     UltCount();
-    ShowDistance();
    taskReport(4); 
     TR0 = 1;
  //  LcdShowNum("   ");
   
+}
+// report average distance of three times
+void task5(void)
+{
+    CalAverage(); 
+    ShowDistance();
+    taskReport(5);
+
 }
 //
 // /* itoa:  convert n to characters in s */

@@ -3,6 +3,7 @@
 SBIT(TRIG, 0xb0, 2);
 SBIT(ECHO, 0xb0, 3);
 int L = 0;
+int lengths[3] = { 0 };
 void UltStart()
 {
     char i;
@@ -27,6 +28,7 @@ void UltInit()
 
 void UltCount()
 {
+    static char i = 0;
     float time = 0.0;
 
     while(!ECHO);                //等待高电平
@@ -38,7 +40,12 @@ void UltCount()
     //L = 0.18446*time;
     //L = 1 *time;
     //L = (time * 2 ) / 9;
-    L = time * 0.18746;
+    if( (i < 0) || (i  > 2) ){
+            i = 0;
+    }
+    lengths[i] = time * RATE;
+    i++;
+
     TH1 = 0;                   //重置计时器
     TL1 = 0;
 }
@@ -46,4 +53,8 @@ void UltCount()
 void ShowDistance()
 {
     LcdShowNum( 12, 1, L);
+}
+void CalAverage()
+{
+   L = ( lengths[0] + lengths[1] + lengths[2] ) / 3.0 ;
 }
